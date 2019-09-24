@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 //@RequestMapping("/demo")
 public class DemoController {
 
-    @GetMapping("/hellow")
-    public String test22(@RequestParam(name = "name",required = false) String name, Model model) {
-        model.addAttribute("name",name);
-        return "hellow";
+    @GetMapping("/")
+    public String test22() {
+
+        return "index";
     }
 
 }
