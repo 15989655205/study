@@ -40,7 +40,7 @@ public class GitHubProvider {
 
 
             Request request = new Request.Builder()
-                    .url("https://api.github.com/user?access_token=40f728f0dbc8ea280c08e1a4b02c4946c76ba4c2")
+                    .url("https://api.github.com/user?access_token="+accessToken+"")
                     .build();
 
             try (Response response = client.newCall(request).execute()) {

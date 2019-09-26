@@ -41,8 +41,9 @@ public class AuthorizeController {
         GithubUser user = gitHubProvider.getUser(accessToken);
         if(user!=null){
             request.getSession().setAttribute("user",user);
-            return "redirect:index";
+            System.out.println(user.getName());
+            return "redirect:/";
         }
-        return "redirect:index";
+        return "redirect:/";
     }
 }
