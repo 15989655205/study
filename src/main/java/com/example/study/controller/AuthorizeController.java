@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class AuthorizeController {
 
@@ -25,7 +27,8 @@ public class AuthorizeController {
 
     @RequestMapping("/callback")
     public   String callback(@RequestParam(name="code") String code,
-                             @RequestParam(name="state") String state)
+                             @RequestParam(name="state") String state
+                            ,HttpServletRequest request)
     {
         AccessTokenDTO accessTokenDTO=new AccessTokenDTO();
         accessTokenDTO.setCode(code);
@@ -36,7 +39,10 @@ public class AuthorizeController {
 
         String accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
         GithubUser user = gitHubProvider.getUser(accessToken);
-        System.out.println(user.getName());
-        return  "index";
+        if(user!=null){
+            request.getSession().setAttribute("user",user);
+            return "redirect:index";
+        }
+        return "redirect:index";
     }
 }
