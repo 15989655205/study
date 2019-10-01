@@ -1,10 +1,13 @@
 package com.example.study.model;
 
+import lombok.Data;
+
+@Data
 public class User {
     private String id;
     private String name;
-    private String accountId;
+    private Long accountId;
     private String token;
-    private String gmtCreate;
-    private String gmnModified;
+    private Long gmtCreate;
+    private Long gmtModified;
 }

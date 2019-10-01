@@ -1,5 +1,8 @@
 package com.example.study.dto;
 
+import org.springframework.stereotype.Component;
+
+
 public class AccessTokenDTO {
     public String getClient_id() {
         return client_id;

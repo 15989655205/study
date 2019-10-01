@@ -1,5 +1,7 @@
 package com.example.study.dto;
 
+import org.springframework.stereotype.Component;
+
 public class GithubUser {
     private String name;
     private Long id;
