@@ -55,11 +55,12 @@ public class AuthorizeController {
             user.setName(githubUser.getName());
             user.setAccountId(githubUser.getId());
             user.setGmtCreate(System.currentTimeMillis() );
+            user.setAvataUrl(githubUser.getAvatar_url());
             userMapper.insert(user);
 
             request.getSession().setAttribute("user",githubUser);
             response.addCookie(new Cookie("token",accessToken));
-            System.out.println(githubUser.getName());
+            System.out.println(githubUser.getAvatar_url());
             return "redirect:/";
         }
         return "redirect:/";
