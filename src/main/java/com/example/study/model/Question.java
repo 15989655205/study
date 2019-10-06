@@ -6,7 +6,7 @@ import lombok.Data;
 public class Question {
     private String title;
     private String description;
-    private Long gmt_create;
+    private Long gmtCreate;
     private Long gmtModified;
     private String creator;
     private String tag;
