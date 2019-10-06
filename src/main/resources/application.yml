@@ -6,7 +6,9 @@ github:
     secret: fea8fd98fdfcdfa8fe6df9d1b1f01f702dfcccee
   redirect:
     url: http://localhost:8080/callback
-#mybatis:
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
 #    typeAliasesPackage: com.example.study.mapper
 #    mapperLocations: classpath:mapper/*.xml
 
