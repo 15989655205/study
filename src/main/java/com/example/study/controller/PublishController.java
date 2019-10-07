@@ -35,6 +35,11 @@ public class PublishController {
             @RequestParam String tag,
             HttpServletRequest request,
             Model model) {
+
+        model.addAttribute("title", title);
+        model.addAttribute("description", description);
+        model.addAttribute("tag", tag);
+
         User user=null;
         Cookie[] cookies = request.getCookies();
         if(cookies!=null) {
@@ -53,7 +58,16 @@ public class PublishController {
 
         if (user == null) {
             model.addAttribute("error", "用户未登陆。");
+            return "publish";
+        }
 
+        if (title == "") {
+            model.addAttribute("error", "标题不能为空。");
+            return "publish";
+        }
+        if (description == "") {
+            model.addAttribute("error", "内容不能为空。");
+            return "publish";
         }
 
         Question question = new Question();

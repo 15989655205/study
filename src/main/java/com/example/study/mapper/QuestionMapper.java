@@ -10,9 +10,12 @@ import java.util.List;
 
 @Mapper
 public interface QuestionMapper {
-    @Insert("insert into Question(TITLE,DESCRIPTION,GMT_CREATE,CREATOR,TAG) values(#{title},#{description},#{gmt_create},#{creator},#{tag})")
+    @Insert("insert into Question(TITLE,DESCRIPTION,GMT_CREATE,CREATOR,TAG) values(#{title},#{description},#{gmtCreate},#{creator},#{tag})")
     void create(Question question);
 
-    @Select("select * from Question")
+    @Select("select * from Question limit #{offset},#{size}")
     List<Question> list();
+
+    @Select("select count(1) from question")
+    Integer count();
 }

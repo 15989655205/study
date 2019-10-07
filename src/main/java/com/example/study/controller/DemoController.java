@@ -1,5 +1,6 @@
 package com.example.study.controller;
 
+import com.example.study.dto.PaginationDTO;
 import com.example.study.dto.QuestionDTO;
 import com.example.study.mapper.QuestionMapper;
 import com.example.study.mapper.UserMapper;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +29,9 @@ public class DemoController {
     
     @GetMapping("/")
     public String test22(HttpServletRequest request,
-                         Model model) {
+                         Model model,
+                         @RequestParam(name = "page",defaultValue = "1") Integer  page,
+                         @RequestParam(name = "size",defaultValue = "5") Integer  size) {
         Cookie[] cookies = request.getCookies();
         if(cookies!=null) {
             for (Cookie cookie : cookies) {
@@ -44,8 +48,8 @@ public class DemoController {
             }
         }
 
-        List<QuestionDTO> list = questionService.list();
-        model.addAttribute("questionList",list);
+        PaginationDTO paginationDTO = questionService.list(page,size);
+        model.addAttribute("paginationDTO",paginationDTO);
         return "index";
     }
 
