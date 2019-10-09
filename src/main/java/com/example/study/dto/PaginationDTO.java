@@ -12,4 +12,7 @@ public class PaginationDTO {
     private Integer page;
 
     private List<Integer> pages;
+
+    public static void setPagination(Integer count, Integer page, Integer size) {
+    }
 }

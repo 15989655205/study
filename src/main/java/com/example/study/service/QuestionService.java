@@ -35,6 +35,9 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
+
+        Integer count = questionMapper.count();
+        PaginationDTO.setPagination(count,page,size)
         return  paginationDTO;
     }
 }
