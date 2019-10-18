@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ProfileController {
-    @Autowired
-    private UserMapper userMapper;
+
     @Autowired
     private QuestionService questionService;
 
@@ -27,21 +26,7 @@ public class ProfileController {
                           Model model,
                           @RequestParam(name = "page",defaultValue = "1") Integer  page,
                           @RequestParam(name = "size",defaultValue = "5") Integer  size) {
-        User user = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null) {
-            for (Cookie cookie : cookies) {
-                String name = cookie.getName();
-                if (name.equals("token")) {
-                    String value = cookie.getValue();
-                     user = userMapper.findByAccountId(Long.parseLong(value));
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                    break;
-                }
-            }
-        }
+        User user = (User) request.getSession().getAttribute("user");
 
         if (user==null){
             return "redirect:/";
