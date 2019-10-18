@@ -1,5 +1,6 @@
 package com.example.study.controller;
 
+import com.example.study.dto.PaginationDTO;
 import com.example.study.mapper.UserMapper;
 import com.example.study.model.User;
 import com.example.study.service.QuestionService;
@@ -33,7 +34,7 @@ public class ProfileController {
                 String name = cookie.getName();
                 if (name.equals("token")) {
                     String value = cookie.getValue();
-                     user = userMapper.findByToken(value);
+                     user = userMapper.findByAccountId(Long.parseLong(value));
                     if (user != null) {
                         request.getSession().setAttribute("user", user);
                     }
@@ -47,14 +48,17 @@ public class ProfileController {
         }
 
         if ("question".equals(action)){
-            model.addAttribute("section","Questions");
+            model.addAttribute("section","question");
+            model.addAttribute("action","question");
             model.addAttribute("sectionName","我的提问");
         }else if("repiles".equals(action)){
             model.addAttribute("section","repiles");
             model.addAttribute("sectionName","最新回复");
+            model.addAttribute("action","repiles");
         }
 
-        questionService.list(user.getId(),page,zize)
+        PaginationDTO paginationDTO = questionService.listByUserId(user.getId(), page, size);
+        model.addAttribute("paginationDTO",paginationDTO);
         return "profile";
     }
 }

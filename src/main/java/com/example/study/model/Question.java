@@ -8,7 +8,7 @@ public class Question {
     private String description;
     private Long gmtCreate;
     private Long gmtModified;
-    private String creator;
+    private Long creator;
     private String tag;
     private Integer commentCount;
     private Integer viewCount;
