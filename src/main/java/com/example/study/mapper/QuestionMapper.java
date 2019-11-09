@@ -23,5 +23,9 @@ public interface QuestionMapper {
     @Select("select count(1) from question where creator=#{userId}")
     Integer countByUserId(@Param(value = "userId") Long userId);
 
-    Question getById(Integer id);
+    @Select("select * from question where  id=#{id} ")
+    Question getById(@Param("id") Integer id);
+
+    @Update("update question set title=#{title},description=#{description},gmt_modified=#{gmtModified} where id=#{ID}")
+    void update(Question question);
 }

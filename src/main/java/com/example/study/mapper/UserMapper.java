@@ -1,5 +1,6 @@
 package com.example.study.mapper;
 
+import com.example.study.dto.GithubUser;
 import com.example.study.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,4 +21,7 @@ public interface UserMapper {
 
     @Select("select * from user where account_id=#{account_id}")
     User findByAccountId(@Param("account_id") Long accountId);
+
+    @Select("update user set token=#{token} where account_id=#{accountId}")
+    User updateToken(User user);
 }
